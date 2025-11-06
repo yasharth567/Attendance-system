@@ -1,8 +1,8 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import FlightSearchForm from './FlightSearchForm';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -15,16 +15,17 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen h-screen overflow-hidden">
-      <div 
+      {/* ✅ Local background image from /public */}
+      <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://readdy.ai/api/search-image?query=Dark%20mysterious%20night%20sky%20with%20airplane%20silhouette%20flying%20through%20stormy%20clouds%2C%20dramatic%20atmospheric%20lighting%20with%20deep%20purple%20and%20dark%20blue%20tones%2C%20moody%20aviation%20photography%20with%20lightning%20illuminating%20dramatic%20cloudscape%2C%20cinematic%20dark%20background%20perfect%20for%20modern%20website%20design%2C%20mysterious%20travel%20atmosphere%20with%20sense%20of%20adventure%20and%20sophistication&width=1920&height=1080&seq=dark-hero-bg&orientation=landscape')`,
+          backgroundImage: `url('/dark-hero-bg.jpg')`, // ✅ Local path
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       />
-      
+
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-purple-900/70" />
-      
+
       {/* Particle Rain Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(30)].map((_, i) => (
@@ -52,7 +53,7 @@ export default function HeroSection() {
           />
         ))}
       </div>
-      
+
       <div className="relative z-10 h-full flex items-center pt-16 sm:pt-20">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
@@ -67,7 +68,7 @@ export default function HeroSection() {
               Discover the world with SkySwift. Book flights to over 1,000 destinations worldwide with our seamless booking experience and unbeatable prices.
             </p>
           </div>
-          
+
           <FlightSearchForm />
         </div>
       </div>
@@ -99,3 +100,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
