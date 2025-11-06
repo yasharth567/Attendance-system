@@ -1,7 +1,7 @@
-
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image'; // ✅ Import Next.js Image component
 
 interface HeaderProps {
   currentPage: string;
@@ -23,16 +23,28 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900 shadow-xl border-b border-gray-800">
       <div className="px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between">
+          {/* Left section (Logo + Title) */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-              <i className="ri-eye-line text-white text-xl"></i>
+            {/* ✅ Replace the gradient box with your actual logo */}
+            <div className="w-10 h-10 relative">
+              <Image
+                src="/logo.png" // Path from /public/logo.png
+                alt="AttendEye Logo"
+                fill
+                className="object-contain rounded-lg"
+                priority
+              />
             </div>
+
             <div>
               <h1 className="text-xl font-bold text-white">AttendEye</h1>
-              <p className="text-sm text-gray-400 hidden sm:block">AI Face Recognition System</p>
+              <p className="text-sm text-gray-400 hidden sm:block">
+                AI Face Recognition System
+              </p>
             </div>
           </div>
 
+          {/* Right side navigation (desktop) */}
           <nav className="hidden md:flex items-center space-x-1">
             {menuItems.map((item) => (
               <button
@@ -45,11 +57,14 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                 }`}
               >
                 <i className={`${item.icon} text-lg`}></i>
-                <span className="font-medium hidden lg:block">{item.label}</span>
+                <span className="font-medium hidden lg:block">
+                  {item.label}
+                </span>
               </button>
             ))}
           </nav>
 
+          {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-gray-800 cursor-pointer"
@@ -58,6 +73,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
           </button>
         </div>
 
+        {/* Mobile dropdown menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800 pt-4">
             <nav className="flex flex-col space-y-2">
